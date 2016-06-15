@@ -106,7 +106,7 @@ var biliteralSigns = [
     {chars:"hb",pic:"U13",desc:"plow"},
     {chars:"HA",pic:"M16",desc:"clump of papyrus"},
     {chars:"Hp",pic:"Aa5",desc:"part of a ship"},
-    {chars:"Hm",pic:"D280a",desc:"pelvis and vulva"},
+    {chars:"Hm",pic:"D280A",desc:"pelvis and vulva"},
     {chars:"Hm",pic:"U36",desc:"launderer's club"},
     {chars:"Hn",pic:"M2",desc:"plant"},
     {chars:"Hn",pic:"V36",desc:"receptacle of cloth"},
