@@ -1,18 +1,37 @@
 <html>
     <head>
         
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         
         <div id="main">
-            
+            <div id="start">
+                <h1>
+                    Hieroglyph
+                </h1>
+                <h3>A useful resource for learning hieroglyphs</h3>
+
+                <button onclick="main()">start</button>
+
+                <button onclick="reset()">reset</button>
+            </div>
         </div>        
         
         <script src="hieroglyph.js"></script>
         <style>
+            html, body{
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+                font-family: arial;
+                text-align: center;                
+            }
             #main{
                 max-width: 800px;
+                width: 100%;
+                height: 100%;
                 margin: auto;  
             }
             
@@ -35,6 +54,46 @@
             .row img{
                 max-width:60px;
                 max-height:40px
+            }
+
+            button{
+                width: 100%;
+                padding: 15px;
+                box-sizing: border-box;
+                font-size: 14px;
+                margin: 5px;
+                background: #e4c488;
+                display: block;
+                margin: 5px auto;
+                max-width: 200px;
+                border-style: none;
+                border-radius: 2px;
+                cursor: pointer;
+            }
+
+            button:hover{
+                background: #dabc84;
+            }
+
+            #test{
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+                box-sizing: border-box;
+                z-index: 100;
+                background: sandybrown;
+            }
+
+            #test .testPic{
+                display: block;
+                text-align: center;
+                margin: 20px;
+            }
+
+            #test .testText{
+                text-align: center;
             }
             
         </style>

@@ -193,62 +193,154 @@ var getCharByPic = function(pic){
 }
 
 function main(){
-    var mainDiv = document.getElementById("main");
-    for(var i = 0; i < alphabet.length; i++){
-        var row = document.createElement("div");
-        row.className = "row";
-        
-        var span = document.createElement("span");
-        span.textContent = alphabet[i].name;
-        row.appendChild(span);
-        
-        var imgs = alphabet[i].pic.split(" ");
-        for(var j = 0; j < imgs.length; j++){
-            var img = document.createElement("img");
-            var link = "hieroglyphs/" + imgs[j] + ".png";
-            img.src = link;
-            img.title = link;
-            row.appendChild(img);
-        }
-        
-        mainDiv.appendChild(row);
+
+    var status = getStatus();
+
+    if(status.uniliterals == 0){
+        increaseDifficulty();
     }
 
-    for(var i = 0; i < biliteralSigns.length; i++){
-        var row = document.createElement("div");
-        row.className = "row";
+    if(status.uniliterals < alphabet.length){
+        runUniliteralTest();
+        return;
+    }
 
-        var span = document.createElement("span");
-        span.textContent = biliteralSigns[i].chars;
-        row.appendChild(span);
+    if(status.biliterals < biliteralSigns.length){
+        runBiliteralTest();
+        return;
+    }
 
-        var imgs = biliteralSigns[i].pic.split(" ");
-        for(var j = 0; j < imgs.length; j++){
-            var img = document.createElement("img");
-            var link = "hieroglyphs/" + imgs[j] + ".png";
-            img.src = link;
-            img.title = link;
-            row.appendChild(img);
-        }
-
-        var span = document.createElement("span");
-        row.appendChild(span);
-
-        for(var j = 0; j < biliteralSigns[i].chars.length; j++){
-            var char = getChar(biliteralSigns[i].chars[j]);
-            var imgs = char.pic.split(" ");
-
-            for(var k = 0; k < imgs.length; k++){
-                var img = document.createElement("img");
-                var link = "hieroglyphs/" + imgs[k] + ".png";
-                img.src = link;
-                img.title = link;
-                row.appendChild(img);
-            }
-        }
-
-        mainDiv.appendChild(row);
-    }   
 }
 
-main();
+function getCleantTestPage(){
+    var main = document.getElementById("main");
+    var testPage = document.getElementById("test");
+    if(!testPage){
+       testPage = document.createElement("div");
+       testPage.id = "test";
+       main.appendChild(testPage);
+    }
+    testPage.innerHTML = "";
+    return testPage;
+}
+
+function runUniliteralTest(){
+    var testPage = getCleantTestPage();
+    var allowedUniliterals = getStatus().uniliterals;
+
+    var itemToTest = Math.floor(Math.random() * allowedUniliterals);
+
+    var testText = document.createElement("h2");
+    testText.className = "testText";
+    testText.textContent = "which letter does this symbol represent?";
+    testPage.appendChild(testText);
+
+    var testChar = document.createElement("span");
+    testChar.className = "testPic";
+
+    var char = alphabet[itemToTest];
+    var imgs = char.pic.split(" ");
+
+    for(var k = 0; k < imgs.length; k++){
+    	var img = document.createElement("img");
+    	var link = "hieroglyphs/" + imgs[k] + ".png";
+    	img.src = link;
+    	img.title = link;
+    	testChar.appendChild(img);
+    }
+
+    testPage.appendChild(testChar);
+
+    var correctItem = alphabet[itemToTest];
+    var otherItems = alphabet.filter(function(item){ return item.name != correctItem.name; })
+    var incorrect3 = selectRandom3(otherItems);
+
+    incorrect3.push(correctItem);
+    var allItems = shuffle(incorrect3);
+
+    for(var i = 0; i < allItems.length; i++){
+        var button = document.createElement("button");
+        button.setAttribute("isCorrect", allItems[i].name == correctItem.name);
+        button.onclick = function(e){
+            var target = e.target;
+            var isCorrect = JSON.parse(target.getAttribute("isCorrect"));
+            if(isCorrect){
+                increaseDifficulty();
+                main();
+                return;
+            }
+            else{
+                target.style.background = "red";
+            }
+        }
+        button.textContent = allItems[i].name;
+        testPage.appendChild(button);
+    }
+}
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+function selectRandom3(array){
+    var shuffledArray = shuffle(array);
+    
+    return shuffledArray.slice(0,3);
+}
+
+function rearrangeArray(array){
+
+}
+
+function runBiliteralTest(){
+    var testPage = getCleantTestPage();
+    var allowedBiliterals = getStatus().biliterals;
+
+    var itemToTest = Math.floor(Math.random() * allowedBiliterals);
+
+
+}
+
+function increaseDifficulty(){
+    var status = getStatus();
+
+    if(status.uniliterals < alphabet.length){
+        status.uniliterals++;
+        localStorage.setItem("uniliterals", status.uniliterals);
+        return;
+    }
+    
+    status.biliterals++; 
+    localStorage.setItem("biliterals", status.biliterals);
+}
+
+function getStatus(){
+    
+    var status = {
+        uniliterals: ~~localStorage.getItem("uniliterals"),
+        biliterals: ~~localStorage.getItem("biliterals")
+    };
+
+    return status;
+}
+
+function reset(){
+    localStorage.setItem("uniliterals",0);
+    localStorage.setItem("biliterals",0);
+
+}
