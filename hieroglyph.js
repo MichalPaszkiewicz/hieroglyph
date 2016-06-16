@@ -261,11 +261,15 @@ function runUniliteralTest(){
     for(var i = 0; i < allItems.length; i++){
         var button = document.createElement("button");
         button.setAttribute("isCorrect", allItems[i].name == correctItem.name);
+        button.setAttribute("isLatestItem", allItems[i].pic == correctItem.pic);
         button.onclick = function(e){
             var target = e.target;
             var isCorrect = JSON.parse(target.getAttribute("isCorrect"));
+            var isLatestItem = JSON.parse(target.getAttribute("isLatestItem"));
             if(isCorrect){
-                increaseDifficulty();
+                if(isLatestItem){
+                    increaseDifficulty();
+                }
                 main();
                 return;
             }
@@ -303,36 +307,105 @@ function selectRandom3(array){
     return shuffledArray.slice(0,3);
 }
 
-function rearrangeArray(array){
-
-}
-
 function runBiliteralTest(){
     var testPage = getCleantTestPage();
     var allowedBiliterals = getStatus().biliterals;
 
     var itemToTest = Math.floor(Math.random() * allowedBiliterals);
 
+    var testText = document.createElement("h2");
+    testText.className = "testText";
+    testText.textContent = "which characters can this symbol represent?";
+    testPage.appendChild(testText);
+
+    var testChar = document.createElement("span");
+    testChar.className = "testPic";
+
+    var char = biliteralSigns[itemToTest];
+    var imgs = char.pic.split(" ");
+
+    for(var k = 0; k < imgs.length; k++){
+    	var img = document.createElement("img");
+    	var link = "hieroglyphs/" + imgs[k] + ".png";
+    	img.src = link;
+    	img.title = link;
+    	testChar.appendChild(img);
+    }
+
+    testPage.appendChild(testChar);
+
+    var correctItem = biliteralSigns[itemToTest];
+    var otherItems = biliteralSigns.filter(function(item){ return item.name != correctItem.name && item.chars != correctItem.chars; })
+    var incorrect3 = selectRandom3(otherItems);
+
+    incorrect3.push(correctItem);
+    var allItems = shuffle(incorrect3);
+
+    for(var i = 0; i < allItems.length; i++){
+        var button = document.createElement("button");
+        button.setAttribute("isCorrect", allItems[i].name == correctItem.name);
+        button.setAttribute("isLatestItem", allItems[i].pic == correctItem.pic);
+        button.onclick = function(e){
+            var target = e.target;
+            var isCorrect = JSON.parse(target.getAttribute("isCorrect"));
+            var isLatestItem = JSON.parse(target.getAttribute("isLatestItem"));
+            if(isCorrect){
+                if(isLatestItem){
+                    increaseDifficulty();
+                }
+                main();
+                return;
+            }
+            else{
+                target.style.background = "red";
+            }
+        }
+        button.textContent = allItems[i].name;
+        testPage.appendChild(button);
+    }
+}
+
+function introduceUniliteral(){
+
+}
+
+function introduceBiliteral(){
 
 }
 
 function increaseDifficulty(){
+    if(Math.random() < 0.5){
+        return;
+    }
+
     var status = getStatus();
 
     if(status.uniliterals < alphabet.length){
         status.uniliterals++;
         localStorage.setItem("uniliterals", status.uniliterals);
+        introduceUniliteral();
+        return;
+    }
+
+    if(status.practiceuniliterals < alphabet.length){
+        status.practiceuniliterals++;
+        localStorage.setItem("practiceuniliterals", status.practiceuniliterals);
         return;
     }
     
-    status.biliterals++; 
-    localStorage.setItem("biliterals", status.biliterals);
+    if(status.biliterals < biliteralSigns.length){
+        status.biliterals++; 
+        localStorage.setItem("biliterals", status.biliterals);
+        introduceBiliteral();
+        return;
+    }
 }
 
 function getStatus(){
     
     var status = {
         uniliterals: ~~localStorage.getItem("uniliterals"),
+        practiceuniliterals: ~~localStorage.getItem("practiceuniliterals"),
         biliterals: ~~localStorage.getItem("biliterals")
     };
 
@@ -341,6 +414,7 @@ function getStatus(){
 
 function reset(){
     localStorage.setItem("uniliterals",0);
+    localStorage.setItem("practiceuniliterals",0);
     localStorage.setItem("biliterals",0);
 
 }
