@@ -456,7 +456,7 @@ function introduceBiliteral(){
     		img.title = link;
     		testChar.appendChild(img);
     	}
-    	introPage.appendChild("testChar");
+    	introPage.appendChild(testChar);
     	
     	var info = document.createElement("div");
     	info.textContent = char.desc + " (" + char.chars + ")";
