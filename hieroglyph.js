@@ -284,7 +284,7 @@ function runUniliteralTest(){
             var isCorrect = JSON.parse(target.getAttribute("isCorrect"));
             var isLatestItem = JSON.parse(target.getAttribute("isLatestItem"));
             if(isCorrect){
-                if(isLatestItem || allowedUniliterals => alphabet.length){
+                if(isLatestItem || (allowedUniliterals >= alphabet.length)){
                     increaseDifficulty();
                 }
                 main();
