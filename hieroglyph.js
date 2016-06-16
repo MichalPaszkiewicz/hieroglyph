@@ -284,7 +284,7 @@ function runUniliteralTest(){
             var isCorrect = JSON.parse(target.getAttribute("isCorrect"));
             var isLatestItem = JSON.parse(target.getAttribute("isLatestItem"));
             if(isCorrect){
-                if(isLatestItem){
+                if(isLatestItem || allowedUniliterals => alphabet.length){
                     increaseDifficulty();
                 }
                 main();
@@ -479,7 +479,7 @@ function introduceBiliteral(){
 }
 
 function increaseDifficulty(){
-    if(Math.random() < 0.5){
+    if(Math.random() < 0.3){
         return;
     }
 
