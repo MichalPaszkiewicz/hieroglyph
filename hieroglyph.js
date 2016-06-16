@@ -335,7 +335,7 @@ function runBiliteralTest(){
     testPage.appendChild(testChar);
 
     var correctItem = biliteralSigns[itemToTest];
-    var otherItems = biliteralSigns.filter(function(item){ return item.name != correctItem.name && item.chars != correctItem.chars; })
+    var otherItems = biliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
     var incorrect3 = selectRandom3(otherItems);
 
     incorrect3.push(correctItem);
