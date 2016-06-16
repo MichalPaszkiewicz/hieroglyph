@@ -347,6 +347,9 @@ function runBiliteralTest(){
         button.setAttribute("isLatestItem", allItems[i].pic == correctItem.pic);
         button.onclick = function(e){
             var target = e.target;
+            if(target.tagName == "IMG"){
+            	target = target.parentElement;
+            }
             var isCorrect = JSON.parse(target.getAttribute("isCorrect"));
             var isLatestItem = JSON.parse(target.getAttribute("isLatestItem"));
             if(isCorrect){
