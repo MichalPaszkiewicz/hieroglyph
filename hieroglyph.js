@@ -224,6 +224,18 @@ function getCleantTestPage(){
     return testPage;
 }
 
+function getCleanIntroPage(){
+	var main = document.getElementById("main");
+	var introPage = document.getElementById("intro");
+	if(!introPage){
+		introPage = document.createElement("div");
+		introPage.id = "intro";
+		main.appendChild(introPage);
+	}
+	introPage.innerHTML = "";
+	return introPage;
+}
+
 function runUniliteralTest(){
     var testPage = getCleantTestPage();
     var allowedUniliterals = getStatus().uniliterals;
@@ -382,12 +394,82 @@ function runBiliteralTest(){
     }
 }
 
-function introduceUniliteral(){
 
+
+function introduceUniliteral(){
+	var introPage = getCleanIntroPage();
+	var status = getStatus();
+	
+	var introText = document.createElement("h2");
+	introText.className = "testText";
+    	introText.textContent = "memorise this character:";
+    	introPage.appendChild(introText);
+    	
+    	var testChar = document.createElement("span");
+    	testChar.className = "testPic";
+
+    	var char = alphabet[status.uniliterals - 1];
+    	var imgs = char.pic.split(" ");
+
+    	for(var k = 0; k < imgs.length; k++){
+    		var img = document.createElement("img");
+    		var link = "hieroglyphs/" + imgs[k] + ".png";
+    		img.src = link;
+    		img.title = link;
+    		testChar.appendChild(img);
+    	}
+    	introPage.appendChild(testChar);
+    	
+    	var info = document.createElement("div");
+    	info.textContent = char.name + " (" + char.char + ")";
+    	introPage.appendChild(info);
+    	
+    	var closeButton = document.createElement("button");
+    	closeButton.textContent = "ok!"
+    	closeButton.onclick = function(){
+    		introPage.style.zIndex = 50;
+    	}
+    	introPage.appendChild(closeButton);
+    	
+    	introPage.style.zIndex = 200;
 }
 
 function introduceBiliteral(){
+	var introPage = getCleanIntroPage();
+	var status = getStatus();
+	
+	var introText = document.createElement("h2");
+	introText.className = "testText";
+    	introText.textContent = "memorise this biliteral:";
+    	introPage.appendChild(introText);
+    	
+    	var testChar = document.createElement("span");
+    	testChar.className = "testPic";
 
+    	var char = biliteralSigns[status.biliterals - 1];
+    	var imgs = char.pic.split(" ");
+
+    	for(var k = 0; k < imgs.length; k++){
+    		var img = document.createElement("img");
+    		var link = "hieroglyphs/" + imgs[k] + ".png";
+    		img.src = link;
+    		img.title = link;
+    		testChar.appendChild(img);
+    	}
+    	introPage.appendChild("testChar");
+    	
+    	var info = document.createElement("div");
+    	info.textContent = char.desc + " (" + char.chars + ")";
+    	introPage.appendChild(info);
+    	
+    	var closeButton = document.createElement("button");
+    	closeButton.textContent = "ok!"
+    	closeButton.onclick = function(){
+    		introPage.style.zIndex = 50;
+    	}
+    	introPage.appendChild(closeButton);
+    	
+    	introPage.style.zIndex = 200;
 }
 
 function increaseDifficulty(){
