@@ -557,4 +557,6 @@ function reset(){
     localStorage.setItem("practiceuniliterals",0);
     localStorage.setItem("biliterals",0);
 
+    var alertsDiv = document.getElementById("alerts");
+    alertsDiv.textContent = "data has been reset - things should be a bit easier now!";
 }
