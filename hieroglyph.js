@@ -343,7 +343,7 @@ function runBiliteralTest(){
 
     for(var i = 0; i < allItems.length; i++){
         var button = document.createElement("button");
-        button.setAttribute("isCorrect", allItems[i].name == correctItem.name);
+        button.setAttribute("isCorrect", allItems[i].desc == correctItem.desc);
         button.setAttribute("isLatestItem", allItems[i].pic == correctItem.pic);
         button.onclick = function(e){
             var target = e.target;
