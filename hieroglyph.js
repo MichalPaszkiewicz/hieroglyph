@@ -204,6 +204,10 @@ function main(){
         runUniliteralTest();
         return;
     }
+    
+    if(status.biliterals == 0){
+    	increaseDifficulty();
+    }
 
     if(status.biliterals < biliteralSigns.length){
         runBiliteralTest();
@@ -350,7 +354,7 @@ function runBiliteralTest(){
     var correctItem = biliteralSigns[itemToTest];
     var otherItems = biliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
     var incorrect3 = selectRandom3(otherItems);
-    var latestItem = biliteralSigns[allowedBiliterals];
+    var latestItem = biliteralSigns[allowedBiliterals - 1];
 
     incorrect3.push(correctItem);
     var allItems = shuffle(incorrect3);
