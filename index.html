@@ -4,7 +4,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        
         <div id="main">
             <div id="start">
                 <h1>
@@ -15,6 +14,10 @@
                 <button onclick="main()">start</button>
 
                 <button onclick="reset()">reset</button>
+
+                <a href="https://github.com/MichalPaszkiewicz/hieroglyph" class="button">fork me on github!</a>
+
+                <div id="alerts" style="background:red;"></div>
             </div>
         </div>        
         
@@ -56,7 +59,9 @@
                 max-height:40px
             }
 
-            button{
+            button, .button{
+                text-decoration: none;
+                color: black;
                 width: 100%;
                 padding: 15px;
                 box-sizing: border-box;
@@ -76,7 +81,7 @@
                 max-height: 45px;
             }
 
-            button:hover{
+            button:hover, .button:hover{
                 background: #dabc84;
             }
 

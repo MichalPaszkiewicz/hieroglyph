@@ -1,2 +1,7 @@
 # hieroglyph
-a tool for learning hieroglyphs
+a tool for learning hieroglyphic
+
+currently features:
+
+- uniliteral characters
+- biliteral characters
