@@ -266,6 +266,7 @@ function runUniliteralTest(){
     var correctItem = alphabet[itemToTest];
     var otherItems = alphabet.filter(function(item){ return item.name != correctItem.name; })
     var incorrect3 = selectRandom3(otherItems);
+    var latestItem = alphabet[allowedUniliterals - 1];
 
     incorrect3.push(correctItem);
     var allItems = shuffle(incorrect3);
@@ -273,7 +274,7 @@ function runUniliteralTest(){
     for(var i = 0; i < allItems.length; i++){
         var button = document.createElement("button");
         button.setAttribute("isCorrect", allItems[i].name == correctItem.name);
-        button.setAttribute("isLatestItem", allItems[i].pic == correctItem.pic);
+        button.setAttribute("isLatestItem", allItems[i].pic == latestItem.pic);
         button.onclick = function(e){
             var target = e.target;
             var isCorrect = JSON.parse(target.getAttribute("isCorrect"));
@@ -349,6 +350,7 @@ function runBiliteralTest(){
     var correctItem = biliteralSigns[itemToTest];
     var otherItems = biliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
     var incorrect3 = selectRandom3(otherItems);
+    var latestItem = biliteralSigns[allowedBiliterals - 1];
 
     incorrect3.push(correctItem);
     var allItems = shuffle(incorrect3);
@@ -356,7 +358,7 @@ function runBiliteralTest(){
     for(var i = 0; i < allItems.length; i++){
         var button = document.createElement("button");
         button.setAttribute("isCorrect", allItems[i].desc == correctItem.desc);
-        button.setAttribute("isLatestItem", allItems[i].pic == correctItem.pic);
+        button.setAttribute("isLatestItem", allItems[i].pic == latestItem.pic);
         button.onclick = function(e){
             var target = e.target;
             if(target.tagName == "IMG"){
