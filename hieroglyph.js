@@ -200,7 +200,7 @@ function main(){
         increaseDifficulty();
     }
 
-    if(status.uniliterals < alphabet.length){
+    if(status.uniliterals < alphabet.length || status.practiceuniliterals < alphabet.length){
         runUniliteralTest();
         return;
     }
