@@ -360,7 +360,21 @@ function runBiliteralTest(){
                 target.style.background = "red";
             }
         }
-        button.textContent = allItems[i].name;
+		
+		var chars = allItems[i].chars;
+		for(var j = 0; j < chars.length; j++){
+			var charItem = getChar(chars[j]);
+			
+			var imgs = charItem.pic.split(" ");
+			for(var k = 0; k < imgs.length; k++){
+				var img = document.createElement("img");
+				var link = "hieroglyphs/" + imgs[k] + ".png";
+				img.src = link;
+				img.title = link;
+				button.appendChild(img);
+			}
+		}
+
         testPage.appendChild(button);
     }
 }
