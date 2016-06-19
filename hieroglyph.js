@@ -294,7 +294,7 @@ function runUniliteralTest(){
                 target.style.background = "red";
             }
         }
-        button.textContent = allItems[i].name;
+        button.textContent = allItems[i].name + " (" + allItems[i].char + ")" ;
         testPage.appendChild(button);
     }
 }
@@ -417,6 +417,9 @@ function runBiliteralTest(){
 				button.appendChild(img);
 			}
 		}
+        var charSpan = document.createElement("span");
+        charSpan.textContent = " (" + allItems[i].chars + ")";
+        button.appendChild(charSpan);
 
         testPage.appendChild(button);
     }
