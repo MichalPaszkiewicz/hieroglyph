@@ -39,13 +39,7 @@ function runUniliteralTest(){
     var char = alphabet[itemToTest];
     var imgs = char.pic.split(" ");
 
-    for(var k = 0; k < imgs.length; k++){
-    	var img = document.createElement("img");
-    	var link = "hieroglyphs/" + imgs[k] + ".png";
-    	img.src = link;
-    	img.title = link;
-    	testChar.appendChild(img);
-    }
+    loopThroughImgsAndAddTo(imgs, testChar);
 
     testPage.appendChild(testChar);
 
@@ -96,13 +90,8 @@ function introduceUniliteral(){
     	var char = alphabet[status.uniliterals - 1];
     	var imgs = char.pic.split(" ");
 
-    	for(var k = 0; k < imgs.length; k++){
-    		var img = document.createElement("img");
-    		var link = "hieroglyphs/" + imgs[k] + ".png";
-    		img.src = link;
-    		img.title = link;
-    		testChar.appendChild(img);
-    	}
+        loopThroughImgsAndAddTo(imgs, testChar);
+
     	introPage.appendChild(testChar);
     	
     	var info = document.createElement("div");

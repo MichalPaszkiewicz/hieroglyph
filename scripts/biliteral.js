@@ -37,13 +37,7 @@ function runBiliteralTest(){
     var char = biliteralSigns[itemToTest];
     var imgs = char.pic.split(" ");
 
-    for(var k = 0; k < imgs.length; k++){
-    	var img = document.createElement("img");
-    	var link = "hieroglyphs/" + imgs[k] + ".png";
-    	img.src = link;
-    	img.title = link;
-    	testChar.appendChild(img);
-    }
+    loopThroughImgsAndAddTo(imgs, testChar);
 
     testPage.appendChild(testChar);
 
@@ -83,13 +77,8 @@ function runBiliteralTest(){
 			var charItem = getChar(chars[j]);
 			
 			var imgs = charItem.pic.split(" ");
-			for(var k = 0; k < imgs.length; k++){
-				var img = document.createElement("img");
-				var link = "hieroglyphs/" + imgs[k] + ".png";
-				img.src = link;
-				img.title = link;
-				button.appendChild(img);
-			}
+            loopThroughImgsAndAddTo(imgs, button);
+
 		}
         var charSpan = document.createElement("span");
         charSpan.textContent = " (" + allItems[i].chars + ")";
@@ -114,13 +103,8 @@ function introduceBiliteral(){
     	var char = biliteralSigns[status.biliterals - 1];
     	var imgs = char.pic.split(" ");
 
-    	for(var k = 0; k < imgs.length; k++){
-    		var img = document.createElement("img");
-    		var link = "hieroglyphs/" + imgs[k] + ".png";
-    		img.src = link;
-    		img.title = link;
-    		testChar.appendChild(img);
-    	}
+        loopThroughImgsAndAddTo(imgs, testChar);
+
     	introPage.appendChild(testChar);
     	
     	var info = document.createElement("div");
@@ -133,13 +117,7 @@ function introduceBiliteral(){
 			var charItem = getChar(chars[j]);
 			
 			var imgs = charItem.pic.split(" ");
-			for(var k = 0; k < imgs.length; k++){
-				var img = document.createElement("img");
-				var link = "hieroglyphs/" + imgs[k] + ".png";
-				img.src = link;
-				img.title = link;
-				charDiv.appendChild(img);
-			}
+            loopThroughImgsAndAddTo(imgs, charDiv);
 		}
     	introPage.appendChild(charDiv);
 
