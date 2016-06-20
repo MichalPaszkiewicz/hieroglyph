@@ -23,7 +23,7 @@ var getCharByPic = function(pic){
 }
 
 function runUniliteralTest(){
-    var testPage = getCleantTestPage();
+    var testPage = getCleanTestPage();
     var allowedUniliterals = getStatus().uniliterals;
 
     var itemToTest = Math.floor(Math.random() * allowedUniliterals);

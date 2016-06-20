@@ -20,9 +20,18 @@ function main(){
         return;
     }
 
+    if(status.biliteralReverses == 0){
+        increaseDifficulty();
+    }
+
+    if(status.biliteralReverses < biliteralSigns.length){
+        runBiliteralReverseTest();
+        return;
+    }
+
 }
 
-function getCleantTestPage(){
+function getCleanTestPage(){
     var main = document.getElementById("main");
     var testPage = document.getElementById("test");
     if(!testPage){
@@ -91,9 +100,17 @@ function increaseDifficulty(){
     if(status.biliterals < biliteralSigns.length){
         status.biliterals++; 
         localStorage.setItem("biliterals", status.biliterals);
-        introduceBiliteral();
+        introduceBiliteral(status.biliterals);
         return;
     }
+
+    if(status.biliteralReverses < biliteralSigns.length){
+        status.biliteralReverses++;
+        localStorage.setItem("biliteralReverses", status.biliteralReverses);
+        introduceBiliteral(status.biliteralReverses);
+        return;
+    }
+
 }
 
 function getStatus(){
@@ -101,7 +118,8 @@ function getStatus(){
     var status = {
         uniliterals: ~~localStorage.getItem("uniliterals"),
         practiceuniliterals: ~~localStorage.getItem("practiceuniliterals"),
-        biliterals: ~~localStorage.getItem("biliterals")
+        biliterals: ~~localStorage.getItem("biliterals"),
+        biliteralReverses: ~~localStorage.getItem("biliteralReverses")
     };
 
     return status;
@@ -111,6 +129,7 @@ function reset(){
     localStorage.setItem("uniliterals",0);
     localStorage.setItem("practiceuniliterals",0);
     localStorage.setItem("biliterals",0);
+    localStorage.setItem("biliteralReverses",0);
 
     var alertsDiv = document.getElementById("alerts");
     alertsDiv.textContent = "data has been reset - things should be a bit easier now!";

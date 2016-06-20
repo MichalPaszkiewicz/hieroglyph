@@ -1,18 +1,18 @@
-function biliteralsThatArentLike(pic){
-    var allBiliteralsWithPic = [];
+function biliteralReversesThatArentLike(chars){
+    var allBiliteralsWithChars = [];
 
     //biliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
 
     for(var i = 0; i < biliteralSigns.length; i++){
-        if(biliteralSigns[i].pic == pic){
-            allBiliteralsWithPic.push(biliteralSigns[i]);
+        if(biliteralSigns[i].chars == chars){
+            allBiliteralsWithChars.push(biliteralSigns[i]);
         }
     }
 
     var validIncorrects = [];
 
     for(var i = 0; i < biliteralSigns.length; i++){
-        if(allBiliteralsWithPic.every(function(item){ return item.chars != biliteralSigns[i].chars })){
+        if(allBiliteralsWithChars.every(function(item){ return item.pic != biliteralSigns[i].pic })){
             validIncorrects.push(biliteralSigns[i]);
         }
     }
@@ -20,9 +20,9 @@ function biliteralsThatArentLike(pic){
     return validIncorrects;
 }
 
-function runBiliteralTest(){
+function runBiliteralReverseTest(){
     var testPage = getCleanTestPage();
-    var allowedBiliterals = getStatus().biliterals;
+    var allowedBiliterals = getStatus().biliteralReverses;
 
     var itemToTest = Math.floor(Math.random() * allowedBiliterals);
 
@@ -35,9 +35,17 @@ function runBiliteralTest(){
     testChar.className = "testPic";
 
     var char = biliteralSigns[itemToTest];
-    var imgs = char.pic.split(" ");
 
-    loopThroughImgsAndAddTo(imgs, testChar);
+    for(var i = 0; i < char.chars.length; i++){
+        var charItem = getChar(char.chars[i]);
+
+        var imgs = charItem.pic.split(" ");
+        loopThroughImgsAndAddTo(imgs, testChar);
+    }
+    
+    var charSpan = document.createElement("span");
+    charSpan.textContent = " (" + char.chars + ")";
+    testChar.appendChild(charSpan);
 
     testPage.appendChild(testChar);
 
@@ -71,61 +79,10 @@ function runBiliteralTest(){
                 target.style.background = "red";
             }
         }
-		
-		var chars = allItems[i].chars;
-		for(var j = 0; j < chars.length; j++){
-			var charItem = getChar(chars[j]);
-			
-			var imgs = charItem.pic.split(" ");
-            loopThroughImgsAndAddTo(imgs, button);
 
-		}
-        var charSpan = document.createElement("span");
-        charSpan.textContent = " (" + allItems[i].chars + ")";
-        button.appendChild(charSpan);
+        var imgs = allItems[i].pic.split(" ");
+        loopThroughImgsAndAddTo(imgs, button);
 
         testPage.appendChild(button);
     }
-}
-
-function introduceBiliteral(index){
-	var introPage = getCleanIntroPage();
-	
-	var introText = document.createElement("h2");
-	introText.className = "testText";
-    	introText.textContent = "memorise this biliteral:";
-    	introPage.appendChild(introText);
-    	
-    	var testChar = document.createElement("span");
-    	testChar.className = "testPic";
-
-    	var char = biliteralSigns[index - 1];
-    	var imgs = char.pic.split(" ");
-
-        loopThroughImgsAndAddTo(imgs, testChar);
-
-    	introPage.appendChild(testChar);
-    	
-    	var info = document.createElement("div");
-    	info.textContent = char.desc + " (" + char.chars + ")";
-    	introPage.appendChild(info);
-
-        var charDiv = document.createElement("div");
-        var chars = char.chars;
-		for(var j = 0; j < chars.length; j++){
-			var charItem = getChar(chars[j]);
-			
-			var imgs = charItem.pic.split(" ");
-            loopThroughImgsAndAddTo(imgs, charDiv);
-		}
-    	introPage.appendChild(charDiv);
-
-    	var closeButton = document.createElement("button");
-    	closeButton.textContent = "ok!"
-    	closeButton.onclick = function(){
-    		introPage.style.zIndex = 50;
-    	}
-    	introPage.appendChild(closeButton);
-    	
-    	introPage.style.zIndex = 200;
 }
