@@ -7,6 +7,7 @@ currently features:
 
 - uniliteral characters
 - biliteral characters
+- biliteral character tests in reverse
 
 Coming up:
 
