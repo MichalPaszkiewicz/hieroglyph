@@ -28,7 +28,7 @@ function runBiliteralReverseTest(){
 
     var testText = document.createElement("h2");
     testText.className = "testText";
-    testText.textContent = "which characters can this symbol represent?";
+    testText.textContent = "which character can these symbols represent?";
     testPage.appendChild(testText);
 
     var testChar = document.createElement("span");
@@ -50,7 +50,7 @@ function runBiliteralReverseTest(){
     testPage.appendChild(testChar);
 
     var correctItem = biliteralSigns[itemToTest];
-    var otherItems = biliteralsThatArentLike(correctItem.pic);
+    var otherItems = biliteralReversesThatArentLike(correctItem.chars);
     var incorrect3 = selectRandom3(otherItems);
     var latestItem = biliteralSigns[allowedBiliterals - 1];
 
