@@ -25,6 +25,10 @@ function runBiliteralReverseTest(){
     var allowedBiliterals = getStatus().biliteralReverses;
 
     var itemToTest = Math.floor(Math.random() * allowedBiliterals);
+    
+    if(allowedBiliterals > 20 && Math.random() > 0.8 && itemToTest != (allowedBiliterals - 1)){
+    	itemToTest = Math.floor(allowedBiliterals - Math.random() * 20);
+    }
 
     var testText = document.createElement("h2");
     testText.className = "testText";
