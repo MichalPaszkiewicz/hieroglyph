@@ -15,7 +15,7 @@ function main(){
     	increaseDifficulty();
     }
 
-    if(status.biliterals < biliteralSigns.length){
+    if(status.biliterals < multiliteralSigns.length){
         runBiliteralTest();
         return;
     }
@@ -24,7 +24,7 @@ function main(){
         increaseDifficulty();
     }
 
-    if(status.biliteralReverses < biliteralSigns.length){
+    if(status.biliteralReverses < multiliteralSigns.length){
         runBiliteralReverseTest();
         return;
     }
@@ -97,14 +97,14 @@ function increaseDifficulty(){
         return;
     }
     
-    if(status.biliterals < biliteralSigns.length){
+    if(status.biliterals < multiliteralSigns.length){
         status.biliterals++; 
         localStorage.setItem("biliterals", status.biliterals);
         introduceBiliteral(status.biliterals);
         return;
     }
 
-    if(status.biliteralReverses < biliteralSigns.length){
+    if(status.biliteralReverses < multiliteralSigns.length){
         status.biliteralReverses++;
         localStorage.setItem("biliteralReverses", status.biliteralReverses);
         introduceBiliteral(status.biliteralReverses);

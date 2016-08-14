@@ -25,15 +25,15 @@ function drawChart(){
         mainDiv.appendChild(row);
     }
 
-    for(var i = 0; i < biliteralSigns.length; i++){
+    for(var i = 0; i < multiliteralSigns.length; i++){
         var row = document.createElement("div");
         row.className = "row";
 
         var span = document.createElement("span");
-        span.textContent = biliteralSigns[i].chars;
+        span.textContent = multiliteralSigns[i].chars;
         row.appendChild(span);
 
-        var imgs = biliteralSigns[i].pic.split(" ");
+        var imgs = multiliteralSigns[i].pic.split(" ");
         for(var j = 0; j < imgs.length; j++){
             var img = document.createElement("img");
             var link = "hieroglyphs/" + imgs[j] + ".png";
@@ -45,8 +45,8 @@ function drawChart(){
         var span = document.createElement("span");
         row.appendChild(span);
 
-        for(var j = 0; j < biliteralSigns[i].chars.length; j++){
-            var char = getChar(biliteralSigns[i].chars[j]);
+        for(var j = 0; j < multiliteralSigns[i].chars.length; j++){
+            var char = getChar(multiliteralSigns[i].chars[j]);
             var imgs = char.pic.split(" ");
 
             for(var k = 0; k < imgs.length; k++){
@@ -62,3 +62,5 @@ function drawChart(){
     } 
     
 }
+
+drawChart();

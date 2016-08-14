@@ -7,10 +7,11 @@ currently features:
 
 - uniliteral characters
 - biliteral characters
+- triliteral characters
 - biliteral character tests in reverse
+
 
 Coming up:
 
-- triliteral characters
 - words
 - grammar

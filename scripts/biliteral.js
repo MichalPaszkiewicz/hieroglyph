@@ -1,19 +1,19 @@
 function biliteralsThatArentLike(pic){
     var allBiliteralsWithPic = [];
 
-    //biliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
+    //multiliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
 
-    for(var i = 0; i < biliteralSigns.length; i++){
-        if(biliteralSigns[i].pic == pic){
-            allBiliteralsWithPic.push(biliteralSigns[i]);
+    for(var i = 0; i < multiliteralSigns.length; i++){
+        if(multiliteralSigns[i].pic == pic){
+            allBiliteralsWithPic.push(multiliteralSigns[i]);
         }
     }
 
     var validIncorrects = [];
 
-    for(var i = 0; i < biliteralSigns.length; i++){
-        if(allBiliteralsWithPic.every(function(item){ return item.chars != biliteralSigns[i].chars })){
-            validIncorrects.push(biliteralSigns[i]);
+    for(var i = 0; i < multiliteralSigns.length; i++){
+        if(allBiliteralsWithPic.every(function(item){ return item.chars != multiliteralSigns[i].chars })){
+            validIncorrects.push(multiliteralSigns[i]);
         }
     }
 
@@ -34,17 +34,17 @@ function runBiliteralTest(){
     var testChar = document.createElement("span");
     testChar.className = "testPic";
 
-    var char = biliteralSigns[itemToTest];
+    var char = multiliteralSigns[itemToTest];
     var imgs = char.pic.split(" ");
 
     loopThroughImgsAndAddTo(imgs, testChar);
 
     testPage.appendChild(testChar);
 
-    var correctItem = biliteralSigns[itemToTest];
+    var correctItem = multiliteralSigns[itemToTest];
     var otherItems = biliteralsThatArentLike(correctItem.pic);
     var incorrect3 = selectRandom3(otherItems);
-    var latestItem = biliteralSigns[allowedBiliterals - 1];
+    var latestItem = multiliteralSigns[allowedBiliterals - 1];
 
     incorrect3.push(correctItem);
     var allItems = shuffle(incorrect3);
@@ -99,7 +99,7 @@ function introduceBiliteral(index){
     	var testChar = document.createElement("span");
     	testChar.className = "testPic";
 
-    	var char = biliteralSigns[index - 1];
+    	var char = multiliteralSigns[index - 1];
     	var imgs = char.pic.split(" ");
 
         loopThroughImgsAndAddTo(imgs, testChar);

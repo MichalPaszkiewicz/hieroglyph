@@ -1,19 +1,19 @@
 function biliteralReversesThatArentLike(chars){
     var allBiliteralsWithChars = [];
 
-    //biliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
+    //multiliteralSigns.filter(function(item){ return item.desc != correctItem.desc && item.chars != correctItem.chars; })
 
-    for(var i = 0; i < biliteralSigns.length; i++){
-        if(biliteralSigns[i].chars == chars){
-            allBiliteralsWithChars.push(biliteralSigns[i]);
+    for(var i = 0; i < multiliteralSigns.length; i++){
+        if(multiliteralSigns[i].chars == chars){
+            allBiliteralsWithChars.push(multiliteralSigns[i]);
         }
     }
 
     var validIncorrects = [];
 
-    for(var i = 0; i < biliteralSigns.length; i++){
-        if(allBiliteralsWithChars.every(function(item){ return item.pic != biliteralSigns[i].pic })){
-            validIncorrects.push(biliteralSigns[i]);
+    for(var i = 0; i < multiliteralSigns.length; i++){
+        if(allBiliteralsWithChars.every(function(item){ return item.pic != multiliteralSigns[i].pic })){
+            validIncorrects.push(multiliteralSigns[i]);
         }
     }
 
@@ -34,7 +34,7 @@ function runBiliteralReverseTest(){
     var testChar = document.createElement("span");
     testChar.className = "testPic";
 
-    var char = biliteralSigns[itemToTest];
+    var char = multiliteralSigns[itemToTest];
 
     for(var i = 0; i < char.chars.length; i++){
         var charItem = getChar(char.chars[i]);
@@ -49,10 +49,10 @@ function runBiliteralReverseTest(){
 
     testPage.appendChild(testChar);
 
-    var correctItem = biliteralSigns[itemToTest];
+    var correctItem = multiliteralSigns[itemToTest];
     var otherItems = biliteralReversesThatArentLike(correctItem.chars);
     var incorrect3 = selectRandom3(otherItems);
-    var latestItem = biliteralSigns[allowedBiliterals - 1];
+    var latestItem = multiliteralSigns[allowedBiliterals - 1];
 
     incorrect3.push(correctItem);
     var allItems = shuffle(incorrect3);
